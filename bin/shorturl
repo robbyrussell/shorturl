@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "shorturl"
+
+def usage
+  puts "Usage: #$0 <url> [<service>]"
+  puts "Available services:"
+  ShortURL.valid_services.each { |s| puts "\t#{s}" }
+  exit(-1)
+end
+
+def main
+  if ARGV.size < 1
+    usage
+  end
+
+  url = ARGV[0]
+  service = ARGV[1]
+
+  shorturl = if service.nil?
+               ShortURL.shorten(url)
+             else
+               if ShortURL.valid_services.include?(service.to_sym)
+                 ShortURL.shorten(url, service.to_sym)
+               else
+                 puts "Invalid service"
+                 exit(-1)
+               end
+             end
+
+  puts shorturl
+    
+end
+
+main

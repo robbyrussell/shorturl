@@ -1,0 +1,55 @@
+0.8.4:
+    - Fixed support for RubyURL.com
+    - Added support for urlTea.com
+    - Added support for moourl.com
+    
+0.7.0:
+    - Added shortify.com, 0rz.net
+    - Modified unit tests
+    - Started using CVS on RubyForge
+	
+0.6.0:
+    - Changed the method for getting the URL for ln-s.net to use their
+      API.  So basically, this means the new additional argument attribute
+      in the Service class is now useless, because no service uses it.  I've
+      removed it along with the Hash#to_html_args method.
+    - Added d62.net, shiturl.com, littlink.com and clipurl.com
+	
+0.5.0:
+    - Added two services: fyad.org and ln-s.net (thanks to Daniel
+      Dipaolo)
+    - Added an property to the Service class: args.  This allows to give
+      additional arguments to services using the GET method (this was
+      needed by ln-s.net)
+    - Added a method to Hash to convert to an HTML arguments style
+    - Added a script called "shorturl" (duh) in the bin directory for
+      usage from the command line.
+
+0.4.0:
+    - Added minilink.org
+    - More tests for the Service class
+    - Changed the ArgumentError exception for an InvalidService exception in ShortURL.shorten
+    - Created examples/shorten.rb
+    - Added a stats task to the Rakefile.  Requires code_statistics, provided by Rails.
+
+0.3.0:
+    - Added linktrim.com and shorterlink.com
+    - Replaced get_short_url and all the private class methods in favor of a Service class, which makes things clearer
+
+0.2.1:
+    - Added makeashorterlink.com and skinnylink.com
+    - Refactored get_short_url
+	
+0.2.0:
+    - Added shorl.com, snipurl.com and metamark.net
+	
+0.1.0:
+    - Refactored the tinyurl and rubyurl methods
+    - URI.extract to get URLs instead of regular expressions
+    - Added exception handling to get_short_url to return nil in case
+      of a network error
+    - More thorough unit tests
+    - Made tinyurl, rubyurl and get_short_url private class methods
+	
+0.0.1:
+    - Initial release

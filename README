@@ -1,0 +1,78 @@
+= ShortURL 0.8.4
+
+== Summary 
+ShortURL is a very simple library to use URL shortening services such as
+RubyURL, urlTea, and TinyURL.
+
+== Installation
+ShortURL is available as a gem, installation is just like any other gem:
+<tt>$ gem install shorturl</tt>
+
+You can also download the tar.bz2 archive at
+http://rubyforge.org/frs/?group_id=732 if you do not want to use the gem.
+
+== Supported services
+Here is the list of the services supported by ShortURL:
+* http://rubyurl.com
+* http://tinyurl.com
+* http://shorl.com
+* http://snipurl.com
+* http://metamark.net
+* http://makeashorterlink.com
+* http://skinnylink.com
+* http://linktrim.com
+* http://shorterlink.com
+* http://minilink.org
+* http://ln-s.net
+* http://fyad.org
+* http://d62.net
+* http://shiturl.com
+* http://littlink.com
+* http://clipurl.com
+* http://shortify.com
+* http://0rz.net
+* http://moourl.com
+* http://urltea.com
+
+== Usage: 
+call-seq:
+  require "shorturl"
+  puts ShortURL.shorten("http://mypage.com")
+  puts ShortURL.shorten("http://mypage.com", :moourl)
+
+The second parameter represents the service you want to use.  These are:
+* <tt>:rubyurl</tt>
+* <tt>:tinyurl</tt>
+* <tt>:shorl</tt>
+* <tt>:snipurl</tt>
+* <tt>:metamark</tt>
+* <tt>:makeashorterlink</tt>
+* <tt>:skinnylink</tt>
+* <tt>:linktrim</tt>
+* <tt>:shorterlink</tt>
+* <tt>:minlink</tt>
+* <tt>:lns</tt>
+* <tt>:fyad</tt>
+* <tt>:d62</tt>
+* <tt>:shiturl</tt>
+* <tt>:littlink</tt>
+* <tt>:clipurl</tt>
+* <tt>:shortify</tt>
+* <tt>:orz</tt>
+* <tt>:moourl</tt>
+* <tt>:urltea</tt>
+
+
+You can use <tt>ShortURL.valid_services</tt> to obtain a
+list of the valid services (in case I forget to update the
+documentation)
+
+== Thanks
+- Marcel Molina Jr., Devin Mullins for some ideas
+- imperator from #ruby-lang (I don't know your real name, sorry) for
+  helping me with creating and uploading a RubyGem
+- Daniel Dipaolo for telling me about ln-s.net and fyad.org
+  
+== Authors
+- Vincent Foley (original developer)
+- Robby Russell <robbyrussell@gmail.com>
