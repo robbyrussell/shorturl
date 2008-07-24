@@ -2,10 +2,10 @@ require "rubygems"
 
 SPEC = Gem::Specification.new do |s|
   s.name = "shorturl"
-  s.version = "0.8.4"
-  s.author = "Vincent Foley"
-  s.email = "vfoleybourgon@yahoo.ca"
-  s.homepage = "http://shorturl.rubyforge.org"
+  s.version = "0.8.5"
+  s.author = "Robby Russell"
+  s.email = "robby@planetargon.com"
+  s.homepage = "http://github.com/robbyrussell/shorturl/"
   s.platform = Gem::Platform::RUBY
   s.summary = "Shortens URLs using services such as RubyURL, urlTea, and TinyURL"
   candidates = Dir["{bin,lib,doc,test,examples}/**/*"]
