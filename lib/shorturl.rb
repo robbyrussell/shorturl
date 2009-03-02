@@ -61,8 +61,9 @@ class ShortURL
     },
     
     :tinyurl => Service.new("tinyurl.com") { |s|
-      s.action = "/create.php"
-      s.block = lambda { |body| URI.extract(body).grep(/tinyurl/)[-1] }
+      s.action = "/api-create.php"
+      s.method = :get
+      s.block = lambda { |body| URI.extract(body).grep(/tinyurl/)[0] }
     },
     
     :shorl => Service.new("shorl.com") { |s|
