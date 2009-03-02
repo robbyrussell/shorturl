@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/shorturl.rb, line 209</span>
+  <pre><span class="ruby-comment cmt"># File lib/shorturl.rb, line 210</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">shorten</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">service</span> = <span class="ruby-identifier">:rubyurl</span>)
     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">valid_services</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">service</span>
       <span class="ruby-ivar">@@services</span>[<span class="ruby-identifier">service</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">url</span>)

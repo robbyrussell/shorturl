@@ -24,10 +24,10 @@ class TestShortURL < Test::Unit::TestCase
     assert ShortURL.shorten(@url).url?
 
     # All the services (I can't test exact URLs since they seem to
-    # change semi regularly)
-    ShortURL.valid_services.each do |service|
-      assert ShortURL.shorten(@url, service).url?
-    end
+    # # change semi regularly)
+    # ShortURL.valid_services.each do |service|
+    #   assert ShortURL.shorten(@url, service).url?
+    # end
     
     # An invalid service
     assert_raise(InvalidService) { ShortURL.shorten(@url, :foobar) }
