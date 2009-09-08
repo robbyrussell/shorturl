@@ -7,6 +7,9 @@ require "net/http"
 require "cgi"
 require "uri"
 
+class ServiceNotAvailable < Exception
+end
+
 class InvalidService < Exception
 end
 
@@ -44,6 +47,8 @@ class Service
         @block.call(response.read_body)
       end
     }
+  rescue Errno::ECONNRESET => e
+    raise ServiceNotAvailable, e.to_s, e.backtrace
   end
 end
 
