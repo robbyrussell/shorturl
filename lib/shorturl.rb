@@ -147,7 +147,7 @@ class ShortURL
       s.block = lambda { |body| URI.extract(body).grep(/clipurl/)[0] }
     },
 
-    :shortify => Service.new("shortify.com") { |s|
+    :shortify => Service.new("shortify.wikinote.com") { |s|
       s.method = :get
       s.action = "/shorten.php"
       s.block = lambda { |body| URI.extract(body).grep(/shortify/)[0] }
