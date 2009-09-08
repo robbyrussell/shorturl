@@ -163,7 +163,7 @@ class ShortURL
       s.action = "/create/"
       s.method = :get      
       s.field = "source"
-      s.block = lambda { |body| body.gsub('Location/woot/?moo=','http://moourl.com/') } 
+      s.response_block = lambda { |res| "http://moourl.com/" + res["location"].match(/\?moo=/).post_match }
     },
     
     :urltea => Service.new("urltea.com") { |s| 
