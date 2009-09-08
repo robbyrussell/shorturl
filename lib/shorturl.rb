@@ -75,13 +75,15 @@ class ShortURL
       s.block = lambda { |body| URI.extract(body)[2] }
     },
 
+    # SnipURL offers a restful HTTP API but it cannot be used without
+    # registration.
     :snipurl => Service.new("snipurl.com") { |s|
-      s.action = "/index.php"
-      s.field = "link"
-      s.block = lambda { |body|
-        line = body.split("\n").grep(/txt/)[0]
-        short_url = URI.extract(line)[1][0..-2] # Remove trailing '
-      }
+      s.action = "/site/index"
+      s.field = "url"
+
+      # As with other services, this is far from elegant and might break
+      # any time. Might just be better to do some HTML parsing instead.
+      s.block = lambda { |body| URI.extract(body).grep(/http:\/\/snipurl.com/)[0] }
     },
 
     :metamark => Service.new("metamark.net") { |s|
