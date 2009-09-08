@@ -14,7 +14,7 @@ class InvalidService < Exception
 end
 
 class Service
-  attr_accessor :port, :code, :method, :action, :field, :block
+  attr_accessor :port, :code, :method, :action, :field, :block, :response_block
 
   # Intialize the service with a hostname (required parameter) and you
   # can override the default values for the HTTP port, expected HTTP
@@ -28,7 +28,6 @@ class Service
     @method = :post
     @action = "/"
     @field = "url"
-    @block = lambda { |body| }
 
     if block_given?
       yield self
@@ -44,7 +43,7 @@ class Service
                  when :get: http.get("#{@action}?#{@field}=#{CGI.escape(url)}")
                  end
       if response.code == @code.to_s
-        @block.call(response.read_body)
+        @response_block ? @response_block.call(response) : @block.call(response.read_body)
       end
     }
   rescue Errno::ECONNRESET => e
