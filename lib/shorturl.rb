@@ -130,6 +130,13 @@ class ShortURL
       s.block  = lambda { |body|
         body.match(%r{<input id="shortened-url" value="(.*)" />}).captures[0]
       }
+    },
+
+    :ur1 => Service.new("ur1.ca") { |s|
+      s.method = :post
+      s.action = "/"
+      s.field  = "longurl"
+      s.block  = lambda { |body| URI.extract(body).grep(/ur1/)[0] }
     }
 
     # :skinnylink => Service.new("skinnylink.com") { |s|
