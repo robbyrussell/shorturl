@@ -90,23 +90,6 @@ class ShortURL
       s.block = lambda { |body| URI.extract(body).grep(/xrl.us/)[0] }
     },
 
-
-    :skinnylink => Service.new("skinnylink.com") { |s|
-      s.block = lambda { |body| URI.extract(body).grep(/skinnylink/)[0] }
-    },
-
-    :linktrim => Service.new("linktrim.com") { |s|
-      s.method = :get
-      s.action = "/lt/generate"
-      s.block = lambda { |body| URI.extract(body).grep(/\/linktrim/)[1] }
-    },
-
-    :shorterlink => Service.new("shorterlink.com") { |s|
-      s.method = :get
-      s.action = "/add_url.html"
-      s.block = lambda { |body| URI.extract(body).grep(/shorterlink/)[0] }
-    },
-
     :minilink => Service.new("minilink.org") { |s|
       s.method = :get
       s.block = lambda { |body| URI.extract(body)[-1] }
@@ -118,40 +101,16 @@ class ShortURL
       s.block = lambda { |body| URI.extract(body)[0] }
     },
 
-    :fyad => Service.new("fyad.org") { |s|
-      s.method = :get
-      s.block = lambda { |body| URI.extract(body).grep(/fyad.org/)[2] }
-    },
-
-    :d62 => Service.new("d62.net") { |s|
-      s.method = :get
-      s.block = lambda { |body| URI.extract(body)[0] }
-    },
-
     :shiturl => Service.new("shiturl.com") { |s|
       s.method = :get
       s.action = "/make.php"
       s.block = lambda { |body| URI.extract(body).grep(/shiturl/)[0] }
     },
 
-    :littlink => Service.new("littlink.com") { |s|
-      s.block = lambda { |body| URI.extract(body).grep(/littlink/)[0] }
-    },
-
-    :clipurl => Service.new("clipurl.com") { |s|
-      s.action = "/create.asp"
-      s.block = lambda { |body| URI.extract(body).grep(/clipurl/)[0] }
-    },
-
     :shortify => Service.new("shortify.wikinote.com") { |s|
       s.method = :get
       s.action = "/shorten.php"
       s.block = lambda { |body| URI.extract(body).grep(/shortify/)[-1] }
-    },
-
-    :orz => Service.new("0rz.net") { |s|
-      s.action = "/create.php"
-      s.block = lambda { |body| URI.extract(body).grep(/0rz/)[0] }
     },
     
     :moourl => Service.new("moourl.com") { |s|      
@@ -160,13 +119,53 @@ class ShortURL
       s.method = :get      
       s.field = "source"
       s.response_block = lambda { |res| "http://moourl.com/" + res["location"].match(/\?moo=/).post_match }
-    },
-    
-    :urltea => Service.new("urltea.com") { |s| 
-      s.method = :get
-      s.action = "/create/"
-      s.block = lambda { |body| URI.extract(body).grep(/urltea/)[6] }       
     }
+
+    # :skinnylink => Service.new("skinnylink.com") { |s|
+    #   s.block = lambda { |body| URI.extract(body).grep(/skinnylink/)[0] }
+    # },
+
+    # :linktrim => Service.new("linktrim.com") { |s|
+    #   s.method = :get
+    #   s.action = "/lt/generate"
+    #   s.block = lambda { |body| URI.extract(body).grep(/\/linktrim/)[1] }
+    # },
+
+    # :shorterlink => Service.new("shorterlink.com") { |s|
+    #   s.method = :get
+    #   s.action = "/add_url.html"
+    #   s.block = lambda { |body| URI.extract(body).grep(/shorterlink/)[0] }
+    # },
+
+    # :fyad => Service.new("fyad.org") { |s|
+    #   s.method = :get
+    #   s.block = lambda { |body| URI.extract(body).grep(/fyad.org/)[2] }
+    # },
+
+    # :d62 => Service.new("d62.net") { |s|
+    #   s.method = :get
+    #   s.block = lambda { |body| URI.extract(body)[0] }
+    # },
+
+    # :littlink => Service.new("littlink.com") { |s|
+    #   s.block = lambda { |body| URI.extract(body).grep(/littlink/)[0] }
+    # },
+
+    # :clipurl => Service.new("clipurl.com") { |s|
+    #   s.action = "/create.asp"
+    #   s.block = lambda { |body| URI.extract(body).grep(/clipurl/)[0] }
+    # },
+
+    # :orz => Service.new("0rz.net") { |s|
+    #   s.action = "/create.php"
+    #   s.block = lambda { |body| URI.extract(body).grep(/0rz/)[0] }
+    # },
+
+    # :urltea => Service.new("urltea.com") { |s|
+    #   s.method = :get
+    #   s.action = "/create/"
+    #   s.block = lambda { |body| URI.extract(body).grep(/urltea/)[6] }
+    # }
   }
 
   # Array containing symbols representing all the implemented URL
