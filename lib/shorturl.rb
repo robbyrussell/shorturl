@@ -37,7 +37,7 @@ class Service
   def call(url)
     Net::HTTP.start(@hostname, @port) { |http|
       response = case @method
-                 when :post: http.post(@action, "#{@field}=#{url}")
+                 when :post: http.post(@action, "#{@field}=#{CGI.escape(url)}")
                  when :get: http.get("#{@action}?#{@field}=#{CGI.escape(url)}")
                  end
       if response.code == @code.to_s
