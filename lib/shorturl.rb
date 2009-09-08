@@ -90,10 +90,6 @@ class ShortURL
       s.block = lambda { |body| URI.extract(body).grep(/xrl.us/)[0] }
     },
 
-    :makeashorterlink => Service.new("makeashorterlink.com") { |s|
-      s.action = "/index.php"
-      s.block = lambda { |body| URI.extract(body).grep(/makeashorterlink/)[0] }
-    },
 
     :skinnylink => Service.new("skinnylink.com") { |s|
       s.block = lambda { |body| URI.extract(body).grep(/skinnylink/)[0] }
