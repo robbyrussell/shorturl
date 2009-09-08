@@ -150,7 +150,7 @@ class ShortURL
     :shortify => Service.new("shortify.wikinote.com") { |s|
       s.method = :get
       s.action = "/shorten.php"
-      s.block = lambda { |body| URI.extract(body).grep(/shortify/)[0] }
+      s.block = lambda { |body| URI.extract(body).grep(/shortify/)[-1] }
     },
 
     :orz => Service.new("0rz.net") { |s|
