@@ -121,6 +121,15 @@ class ShortURL
       s.method = :get      
       s.field = "source"
       s.response_block = lambda { |res| "http://moourl.com/" + res["location"].match(/\?moo=/).post_match }
+    },
+
+    :bitly => Service.new("bit.ly") { |s|
+      s.method = :get
+      s.action = "/index.php"
+      s.field  = "url"
+      s.block  = lambda { |body|
+        body.match(%r{<input id="shortened-url" value="(.*)" />}).captures[0]
+      }
     }
 
     # :skinnylink => Service.new("skinnylink.com") { |s|
