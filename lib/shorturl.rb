@@ -137,6 +137,13 @@ class ShortURL
       s.action = "/"
       s.field  = "longurl"
       s.block  = lambda { |body| URI.extract(body).grep(/ur1/)[0] }
+    },
+
+    :vurl => Service.new("vurl.me") { |s|
+      s.method = :get
+      s.action = "/shorten"
+      s.field  = "url"
+      s.block  = lambda { |body| body }
     }
 
     # :skinnylink => Service.new("skinnylink.com") { |s|
