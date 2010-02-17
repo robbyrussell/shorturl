@@ -33,6 +33,7 @@ Here is the list of the services supported by ShortURL:
 * http://0rz.net
 * http://moourl.com
 * http://urltea.com
+* http://vurl.me
 
 == Usage: 
 call-seq:
@@ -61,6 +62,7 @@ The second parameter represents the service you want to use.  These are:
 * <tt>:orz</tt>
 * <tt>:moourl</tt>
 * <tt>:urltea</tt>
+* <tt>:vurl</tt>
 
 
 You can use <tt>ShortURL.valid_services</tt> to obtain a
