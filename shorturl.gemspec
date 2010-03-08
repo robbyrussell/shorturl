@@ -2,7 +2,7 @@ require "rubygems"
 
 SPEC = Gem::Specification.new do |s|
   s.name = "shorturl"
-  s.version = "0.8.7"
+  s.version = "0.8.8"
   s.author = "Robby Russell"
   s.email = "robby@planetargon.com"
   s.homepage = "http://github.com/robbyrussell/shorturl/"
