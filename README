@@ -34,6 +34,7 @@ Here is the list of the services supported by ShortURL:
 * http://moourl.com
 * http://urltea.com
 * http://vurl.me
+* http://bit.ly
 
 == Usage: 
 call-seq:
@@ -63,11 +64,38 @@ The second parameter represents the service you want to use.  These are:
 * <tt>:moourl</tt>
 * <tt>:urltea</tt>
 * <tt>:vurl</tt>
+* <tt>:bitly</tt>**
 
 
 You can use <tt>ShortURL.valid_services</tt> to obtain a
 list of the valid services (in case I forget to update the
 documentation)
+
+Bitly**
+-------
+
+   Their API changed to require an API key.  
+
+   Two painfree steps to fix this.
+
+   1) Get yours easily right now from: 
+
+   http://bitly.com/a/your_api_key
+
+
+   2) Save it in ~/.shorturl similar to this YAML template:
+ 
+--- Start of file ~/.shorturl ---
+   
+   ---
+   bitly:
+     username: O_adsfasdfasfasfd
+     key: R_afasdfasdfasdf
+
+--- END of file ~/.shorturl ---
+
+
+   You're done!  Have a martini.  Cheers.
 
 == Thanks
 - Marcel Molina Jr., Devin Mullins for some ideas
