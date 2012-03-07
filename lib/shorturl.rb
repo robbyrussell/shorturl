@@ -14,7 +14,7 @@ class InvalidService < Exception
 end
 
 class Service
-  attr_accessor :port, :code, :method, :action, :field, :block, :response_block
+  attr_accessor :port, :code, :method, :action, :field, :block, :response_block, :ssl
 
   # Intialize the service with a hostname (required parameter) and you
   # can override the default values for the HTTP port, expected HTTP
@@ -28,6 +28,7 @@ class Service
     @method = :post
     @action = "/"
     @field = "url"
+    @ssl = false
 
     if block_given?
       yield self
@@ -37,7 +38,11 @@ class Service
   # Now that our service is set up, call it with all the parameters to
   # (hopefully) return only the shortened URL.
   def call(url)
-    Net::HTTP.start(@hostname, @port) { |http|
+    Net::HTTP.start(@hostname, @port,
+                    :use_ssl     => ssl,
+                    :verify_mode => OpenSSL::SSL::VERIFY_NONE,
+                    :scheme      => ssl ? 'https' : 'http'
+    ) { |http|
       response = case @method
                  when :post: http.post(@action, "#{@field}=#{CGI.escape(url)}")
                  when :get: http.get("#{@action}?#{@field}=#{CGI.escape(url)}")
@@ -123,13 +128,17 @@ class ShortURL
       s.response_block = lambda { |res| "http://moourl.com/" + res["location"].match(/\?moo=/).post_match }
     },
 
-    :bitly => Service.new("bit.ly") { |s|
+    :bitly => Service.new("api-ssl.bitly.com") { |s|
       s.method = :get
-      s.action = "/index.php"
-      s.field  = "url"
-      s.block  = lambda { |body|
-        body.match(%r{<input id="shortened-url" value="(.*)" />}).captures[0]
-      }
+      s.port   = 443
+      s.ssl    = true
+      s.action = "/v3/shorten/"
+      require 'yaml'
+      creds = YAML.load(File.read(File.join(ENV["HOME"],"/.shorturl")))['bitly']
+      username = creds['username'] 
+      key = creds['key'] 
+      s.field  = "format=txt&login=#{username}&apiKey=#{key}&longUrl"
+      s.block  = lambda { |body| body }
     },
 
     :ur1 => Service.new("ur1.ca") { |s|
