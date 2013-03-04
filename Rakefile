@@ -1,6 +1,6 @@
 require "rake"
-require "rake/rdoctask"
 require "rake/testtask"
+require "rdoc/task"
 
 task :default => [ :test, :doc ]
 
@@ -11,7 +11,7 @@ Rake::TestTask.new("test") { |t|
 }
 
 desc "Write the documentation"
-Rake::RDocTask.new("doc") { |rdoc|
+RDoc::Task.new("doc") { |rdoc|
   rdoc.rdoc_dir = "doc"
   rdoc.title = "ShortURL Documentation"
 #  rdoc.options << "--line-numbers --inline-source"
