@@ -62,10 +62,10 @@ end
 
 class ShortURL
   def self.credentials
-    @@credentials ||= begin
+    @credentials ||= begin
                         credentials_path = File.join(Gem.user_home,'.shorturl')
                         if File.file?(credentials_path)
-                          @@credentials.merge!(YAML.load_file(credentials_path))
+                          YAML.load_file(credentials_path)
                         else
                           {}
                         end
@@ -82,7 +82,7 @@ class ShortURL
   # .net, etc.)  The value is an instance of Service with all the
   # parameters set so that when +instance+.call is invoked, the
   # shortened URL is returned.
-  @@services = {
+  SERVICES = {
     :tinyurl => Service.new("tinyurl.com") { |s|
       s.action = "/api-create.php"
       s.method = :get
@@ -217,11 +217,8 @@ class ShortURL
 
   # Array containing symbols representing all the implemented URL
   # shortening services
-  @@valid_services = @@services.keys
-
-  # Returns @@valid_services
   def self.valid_services
-    @@valid_services
+    SERVICES.keys
   end
 
   # Main method of ShortURL, its usage is quite simple, just give an
@@ -254,8 +251,8 @@ class ShortURL
   #   ShortURL.shorten("http://mypage.com") => Uses TinyURL
   #   ShortURL.shorten("http://mypage.com", :bitly)
   def self.shorten(url, service = :tinyurl)
-    if valid_services.include? service
-      @@services[service].call(url)
+    if SERVICES.has_key?(service)
+      SERVICES[service].call(url)
     else
       raise InvalidService
     end
