@@ -6,6 +6,7 @@
 require "net/http"
 require "cgi"
 require "uri"
+require "yaml"
 
 class ServiceNotAvailable < Exception
 end
@@ -60,6 +61,22 @@ class Service
 end
 
 class ShortURL
+  def self.credentials
+    @@credentials ||= begin
+                        credentials_path = File.join(Gem.user_home,'.shorturl')
+                        if File.file?(credentials_path)
+                          @@credentials.merge!(YAML.load_file(credentials_path))
+                        else
+                          {}
+                        end
+                      end
+  end
+
+  def self.credentials_for(service)
+    credentials.fetch(service,{})
+  end
+
+
   # Hash table of all the supported services.  The key is a symbol
   # representing the service (usually the hostname minus the .com,
   # .net, etc.)  The value is an instance of Service with all the
@@ -136,8 +153,7 @@ class ShortURL
       s.port   = 443
       s.ssl    = true
       s.action = "/v3/shorten/"
-      require 'yaml'
-      creds = YAML.load(File.read(File.join(ENV["HOME"],"/.shorturl")))['bitly']
+      creds = credentials_for('bitly')
       username = creds['username'] 
       key = creds['key'] 
       s.field  = "format=txt&login=#{username}&apiKey=#{key}&longUrl"
