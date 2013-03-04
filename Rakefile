@@ -15,10 +15,9 @@ RDoc::Task.new("doc") { |rdoc|
   rdoc.rdoc_dir = "doc"
   rdoc.title = "ShortURL Documentation"
 #  rdoc.options << "--line-numbers --inline-source"
-  rdoc.rdoc_files.include("README")
-  rdoc.rdoc_files.include("TODO")
-  rdoc.rdoc_files.include("MIT-LICENSE")
-  rdoc.rdoc_files.include("ChangeLog")
+  rdoc.rdoc_files.include("TODO.rdoc")
+  rdoc.rdoc_files.include("LICENSE.txt")
+  rdoc.rdoc_files.include("ChangeLog.txt")
   rdoc.rdoc_files.include("lib/*.rb")
   rdoc.rdoc_files.exclude("test/*")
 }
