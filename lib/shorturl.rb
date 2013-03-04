@@ -83,12 +83,6 @@ class ShortURL
   # parameters set so that when +instance+.call is invoked, the
   # shortened URL is returned.
   @@services = {
-    :rubyurl => Service.new("rubyurl.com") { |s|
-      s.action = "/rubyurl/remote"
-      s.field = "website_url"
-      s.block = lambda { |body| URI.extract(body).grep(/rubyurl/)[0] }      
-    },
-    
     :tinyurl => Service.new("tinyurl.com") { |s|
       s.action = "/api-create.php"
       s.method = :get
@@ -257,9 +251,9 @@ class ShortURL
   # * <tt>:orz</tt>
   #
   # call-seq:
-  #   ShortURL.shorten("http://mypage.com") => Uses RubyURL
-  #   ShortURL.shorten("http://mypage.com", :tinyurl)
-  def self.shorten(url, service = :rubyurl)
+  #   ShortURL.shorten("http://mypage.com") => Uses TinyURL
+  #   ShortURL.shorten("http://mypage.com", :bitly)
+  def self.shorten(url, service = :tinyurl)
     if valid_services.include? service
       @@services[service].call(url)
     else
