@@ -30,6 +30,6 @@ class TestShortURL < Test::Unit::TestCase
     # end
     
     # An invalid service
-    assert_raise(InvalidService) { ShortURL.shorten(@url, :foobar) }
+    assert_raise(ShortURL::InvalidService) { ShortURL.shorten(@url, :foobar) }
   end
 end
