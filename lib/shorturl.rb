@@ -8,11 +8,12 @@ require "uri"
 require "yaml"
 
 module ShortURL
+  CREDENTIALS_PATH = File.join(Gem.user_home,'.shorturl')
+
   def self.credentials
     @credentials ||= begin
-                       credentials_path = File.join(Gem.user_home,'.shorturl')
-                       if File.file?(credentials_path)
-                         YAML.load_file(credentials_path)
+                       if File.file?(CREDENTIALS_PATH)
+                         YAML.load_file(CREDENTIALS_PATH)
                        else
                          {}
                        end
