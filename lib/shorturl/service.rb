@@ -29,22 +29,22 @@ module ShortURL
     # Now that our service is set up, call it with all the parameters to
     # (hopefully) return only the shortened URL.
     def call(url)
-      Net::HTTP.start(@hostname, @port,
-                      :use_ssl     => ssl,
-                      :verify_mode => OpenSSL::SSL::VERIFY_NONE,
-                      :scheme      => ssl ? 'https' : 'http'
-                     ) { |http|
-                       response = case @method
-                                  when :post
-                                    http.post(@action, "#{@field}=#{CGI.escape(url)}")
-                                  when :get
-                                    http.get("#{@action}?#{@field}=#{CGI.escape(url)}")
-                                  end
+      http = Net::HTTP.new(@hostname, @port)
+      http.use_ssl = @ssl
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-                       if response.code == @code.to_s
-                         on_response(response)
-                       end
-                     }
+      http.start do
+        response = case @method
+                   when :post
+                     http.post(@action, "#{@field}=#{CGI.escape(url)}")
+                   when :get
+                     http.get("#{@action}?#{@field}=#{CGI.escape(url)}")
+                   end
+
+        if response.code == @code.to_s
+          on_response(response)
+        end
+      end
     rescue Errno::ECONNRESET => e
       raise ServiceNotAvailable, e.to_s, e.backtrace
     end
