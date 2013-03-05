@@ -1,26 +1,27 @@
 require "rubygems"
 
-SPEC = Gem::Specification.new do |s|
-  s.name = "shorturl"
-  s.version = "0.8.8"
-  s.author = "Robby Russell"
-  s.email = "robby@planetargon.com"
-  s.homepage = "http://github.com/robbyrussell/shorturl/"
-  s.platform = Gem::Platform::RUBY
-  s.summary = "Shortens URLs using services such as RubyURL, urlTea, bit.ly, moourl.com, and TinyURL"
-  candidates = Dir["{bin,lib,doc,test,examples}/**/*"]
-  s.files = candidates
-  s.require_path = "lib"
-  s.autorequire = "shorturl"
-  s.test_file = "test/ts_all.rb"
-  s.has_rdoc = true
-  s.extra_rdoc_files = ["README", "TODO", "MIT-LICENSE", "ChangeLog"]
-  s.rdoc_options = [
-    "--title", "ShortURL Documentation",
-    "--main", "README",
-    "-S",
-    "-N",
-    "--all"]
-  s.default_executable = "shorturl"
-  s.executables = ["shorturl"]
+require File.expand_path('../lib/shorturl/version', __FILE__)
+
+Gem::Specification.new do |gem|
+  gem.name          = "shorturl"
+  gem.version       = ShortURL::VERSION
+  gem.summary       = %q{Shortens URLs using services such as RubyURL, urlTea, bit.ly, moourl.com, and TinyURL}
+  gem.license       = "MIT"
+  gem.authors       = ["Robby Russell"]
+  gem.email         = "robby@planetargon.com"
+  gem.homepage      = "http://github.com/robbyrussell/shorturl/"
+
+  gem.files         = `git ls-files`.split($/)
+  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.require_paths = ['lib']
+
+  gem.extra_rdoc_files = %w[README.rdoc TODO.rdoc LICENSE.txt ChangeLog.txt]
+  gem.rdoc_options = %w[
+    --title ShortURL\ Documentation
+    --main README.rdoc
+    -S -N --all
+  ]
+
+  gem.add_development_dependency 'rdoc', '~> 3.0'
 end
