@@ -6,6 +6,7 @@ task :default => [ :test, :doc ]
 
 desc "Run the tests"
 Rake::TestTask.new("test") { |t|
+  t.libs << 'test'
   t.pattern = "test/**/ts_*.rb"
   t.verbose = true
 }
