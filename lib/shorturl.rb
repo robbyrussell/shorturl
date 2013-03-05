@@ -103,7 +103,6 @@ module ShortURL
   #
   # Valid +service+ values:
   #
-  # * <tt>:rubyurl</tt>
   # * <tt>:tinyurl</tt>
   # * <tt>:shorl</tt>
   # * <tt>:snipurl</tt>
