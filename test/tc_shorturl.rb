@@ -5,12 +5,6 @@
 require "helper"
 require "shorturl"
 
-class String
-  def url?
-    self[0..6].downcase == "http://"
-  end
-end
-
 class TestShortURL < Test::Unit::TestCase
   def setup
     @url = "http://groups.google.com/group/comp.lang.ruby/"
@@ -18,7 +12,7 @@ class TestShortURL < Test::Unit::TestCase
   
   def test_shorten
     # Default service (RubyURL)
-    assert ShortURL.shorten(@url).url?
+    assert_url ShortURL.shorten(@url)
 
     # All the services (I can't test exact URLs since they seem to
     # # change semi regularly)
