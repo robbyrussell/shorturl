@@ -11,9 +11,9 @@ end
 def main
   begin
     case ARGV.length
-    when 0: usage
-    when 1: puts ShortURL.shorten(ARGV[0])
-    else puts ShortURL.shorten(ARGV[0], ARGV[1].to_sym)
+    when 0 then usage
+    when 1 then puts ShortURL.shorten(ARGV[0])
+    else        puts ShortURL.shorten(ARGV[0], ARGV[1].to_sym)
     end
   rescue InvalidService
     puts "Invalid service"
