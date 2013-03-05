@@ -3,7 +3,7 @@
 #   Created by Vincent Foley on 2005-06-02
 #
 
-require "shorturl/service"
+require "shorturl/services"
 require "uri"
 require "yaml"
 
@@ -30,90 +30,18 @@ module ShortURL
   # parameters set so that when +instance+.call is invoked, the
   # shortened URL is returned.
   SERVICES = {
-    :tinyurl => Service.new("tinyurl.com") { |s|
-      s.action = "/api-create.php"
-      s.method = :get
-      s.block = lambda { |body| URI.extract(body).grep(/tinyurl/)[0] }
-    },
-    
-    :shorl => Service.new("shorl.com") { |s|
-      s.action = "/create.php"
-      s.block = lambda { |body| URI.extract(body)[2] }
-    },
-
-    # SnipURL offers a restful HTTP API but it cannot be used without
-    # registration.
-    :snipurl => Service.new("snipurl.com") { |s|
-      s.action = "/site/index"
-      s.field = "url"
-
-      # As with other services, this is far from elegant and might break
-      # any time. Might just be better to do some HTML parsing instead.
-      s.block = lambda { |body| URI.extract(body).grep(/http:\/\/snipurl.com/)[0] }
-    },
-
-    :metamark => Service.new("metamark.net") { |s|
-      s.action = "/add"
-      s.field = "long_url"
-      s.block = lambda { |body| URI.extract(body).grep(/xrl.us/)[0] }
-    },
-
-    :minilink => Service.new("minilink.org") { |s|
-      s.method = :get
-      s.block = lambda { |body| URI.extract(body)[-1] }
-    },
-
-    :lns => Service.new("ln-s.net") { |s|
-      s.method = :get
-      s.action = "/home/api.jsp"
-      s.block = lambda { |body| URI.extract(body)[0] }
-    },
-
-    :shiturl => Service.new("shiturl.com") { |s|
-      s.method = :get
-      s.action = "/make.php"
-      s.block = lambda { |body| URI.extract(body).grep(/shiturl/)[0] }
-    },
-
-    :shortify => Service.new("shortify.wikinote.com") { |s|
-      s.method = :get
-      s.action = "/shorten.php"
-      s.block = lambda { |body| URI.extract(body).grep(/shortify/)[-1] }
-    },
-    
-    :moourl => Service.new("moourl.com") { |s|      
-      s.code = 302
-      s.action = "/create/"
-      s.method = :get      
-      s.field = "source"
-      s.response_block = lambda { |res| "http://moourl.com/" + res["location"].match(/\?moo=/).post_match }
-    },
-
-    :bitly => Service.new("api-ssl.bitly.com") { |s|
-      s.method = :get
-      s.port   = 443
-      s.ssl    = true
-      s.action = "/v3/shorten/"
-      creds = credentials_for('bitly')
-      username = creds['username'] 
-      key = creds['key'] 
-      s.field  = "format=txt&login=#{username}&apiKey=#{key}&longUrl"
-      s.block  = lambda { |body| body }
-    },
-
-    :ur1 => Service.new("ur1.ca") { |s|
-      s.method = :post
-      s.action = "/"
-      s.field  = "longurl"
-      s.block  = lambda { |body| URI.extract(body).grep(/ur1/)[0] }
-    },
-
-    :vurl => Service.new("vurl.me") { |s|
-      s.method = :get
-      s.action = "/shorten"
-      s.field  = "url"
-      s.block  = lambda { |body| body }
-    }
+    :tinyurl => Services::TinyURL.new,
+    :shorl => Services::Shorl.new,
+    :snipurl => Services::SnipURL.new,
+    :metamark => Services::Metamark.new,
+    :minilink => Services::Minilink.new,
+    :lns => Services::Lns.new,
+    :shiturl => Services::ShitURL.new,
+    :shortify => Services::Shortify.new,
+    :moourl => Services::MooURL.new,
+    :bitly => Services::Bitly.new,
+    :ur1 => Services::Url.new,
+    :vurl => Services::Vurl.new,
 
     # :skinnylink => Service.new("skinnylink.com") { |s|
     #   s.block = lambda { |body| URI.extract(body).grep(/skinnylink/)[0] }

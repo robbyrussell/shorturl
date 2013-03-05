@@ -41,11 +41,21 @@ module ShortURL
                                   end
 
                        if response.code == @code.to_s
-                         @response_block ? @response_block.call(response) : @block.call(response.read_body)
+                         on_response(response)
                        end
                      }
     rescue Errno::ECONNRESET => e
       raise ServiceNotAvailable, e.to_s, e.backtrace
+    end
+
+    # Extracts the shortened URL from a response body.
+    def on_body(body)
+      body
+    end
+
+    # Extracts the shortened URL from the response.
+    def on_response(response)
+      on_body(response.read_body)
     end
   end
 end
