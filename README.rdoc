@@ -1,8 +1,7 @@
-= ShortURL 0.8.4
+= ShortURL 1.0.0
 
-== Summary 
-ShortURL is a very simple library to use URL shortening services such as
-RubyURL, urlTea, and TinyURL.
+== Summary
+ShortURL is a very simple library to use URL shortening services.
 
 == Installation
 ShortURL is available as a gem, installation is just like any other gem:
@@ -35,14 +34,13 @@ Here is the list of the services supported by ShortURL:
 * http://vurl.me
 * http://bit.ly
 
-== Usage: 
+== Usage:
 call-seq:
   require "shorturl"
   puts ShortURL.shorten("http://mypage.com")
   puts ShortURL.shorten("http://mypage.com", :moourl)
 
 The second parameter represents the service you want to use.  These are:
-* <tt>:rubyurl</tt>
 * <tt>:tinyurl</tt>
 * <tt>:shorl</tt>
 * <tt>:snipurl</tt>
@@ -73,19 +71,19 @@ documentation)
 Bitly**
 -------
 
-   Their API changed to require an API key.  
+   Their API changed to require an API key.
 
    Two painfree steps to fix this.
 
-   1) Get yours easily right now from: 
+   1) Get yours easily right now from:
 
    http://bitly.com/a/your_api_key
 
 
    2) Save it in ~/.shorturl similar to this YAML template:
- 
+
 --- Start of file ~/.shorturl ---
-   
+
    ---
    bitly:
      username: O_adsfasdfasfasfd
@@ -101,7 +99,7 @@ Bitly**
 - imperator from #ruby-lang (I don't know your real name, sorry) for
   helping me with creating and uploading a RubyGem
 - Daniel Dipaolo for telling me about ln-s.net and fyad.org
-  
+
 == Authors
 - Vincent Foley (original developer)
 - Robby Russell <robbyrussell@gmail.com>
