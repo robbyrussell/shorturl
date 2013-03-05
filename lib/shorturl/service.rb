@@ -1,5 +1,6 @@
 require "shorturl/exceptions"
 require "net/http"
+require "net/https"
 require "cgi"
 
 module ShortURL
