@@ -7,6 +7,7 @@ module ShortURL
       def initialize
         super("shorl.com")
 
+        @method = :get
         @action = "/create.php"
       end
 
