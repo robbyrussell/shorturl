@@ -4,12 +4,16 @@ require "rdoc/task"
 
 task :default => [ :test, :doc ]
 
-desc "Run the tests"
-Rake::TestTask.new("test") { |t|
-  t.libs << 'test'
-  t.pattern = "test/**/ts_*.rb"
-  t.verbose = true
-}
+begin
+  gem 'rspec', '~> 2.4'
+  require 'rspec/core/rake_task'
+
+  RSpec::Core::RakeTask.new
+rescue LoadError => e
+  task :spec do
+    abort "Please run `gem install rspec` to install RSpec."
+  end
+end
 
 desc "Write the documentation"
 RDoc::Task.new("doc") { |rdoc|
