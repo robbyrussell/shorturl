@@ -9,6 +9,12 @@ describe ShortURL do
       subject.shorten(url).should be_a_url
     end
 
+    context "when an alternate service is given" do
+      it "should use the alternate service" do
+        subject.shorten(url,:lns).should =~ /^http:\/\//
+      end
+    end
+
     context "when given an invalid service" do
       it "should raise an InvalidService exception" do
         lambda {
