@@ -43,6 +43,7 @@ module ShortURL
     :ur1 => Services::Url.new,
     :vurl => Services::Vurl.new,
     :isgd => Services::Isgd.new,
+    :gitio => Services::Gitio.new,
 
     # :skinnylink => Service.new("skinnylink.com") { |s|
     #   s.block = lambda { |body| URI.extract(body).grep(/skinnylink/)[0] }
@@ -122,6 +123,7 @@ module ShortURL
   # * <tt>:shortify</tt>
   # * <tt>:orz</tt>
   # * <tt>:isgd</tt>
+  # * <tt>:gitio</tt>
   #
   # call-seq:
   #   ShortURL.shorten("http://mypage.com") => Uses TinyURL
