@@ -2,9 +2,11 @@ require 'spec_helper'
 require 'shorturl/service'
 
 describe Service do
+  subject { described_class.new('tinyurl.com') }
+
+  let(:url) { 'http://www.google.com/' }
+
   describe "#initialize" do
-    subject { described_class.new('tinyurl.com') }
-    
     its(:hostname) { should == 'tinyurl.com' }
 
     its(:port)   { should == 80    }
@@ -32,12 +34,20 @@ describe Service do
     end
   end
 
+  describe "#on_body" do
+    let(:body) { "<b>http://tinyurl.com/161</b>" }
+
+    it "should return the body as-is" do
+      subject.on_body(body).should == body
+    end
+  end
+
   describe "#call" do
     context "when the hostname does not resolv" do
       subject { described_class.new("oasdasobf") }
 
       it "should raise SocketError" do
-        lambda { subject.call(nil) }.should raise_error(SocketError)
+        lambda { subject.call(url) }.should raise_error(SocketError)
       end
     end
 
@@ -53,7 +63,7 @@ describe Service do
       end
 
       it "should return nil" do
-        subject.call('http://www.google.com').should be_nil
+        subject.call(url).should be_nil
       end
     end
   end
