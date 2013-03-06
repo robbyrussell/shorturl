@@ -14,7 +14,7 @@ module ShortURL
       end
 
       def on_body(body)
-        URI.extract(body).grep(/http:\/\/snipurl.com/)[0]
+        URI.extract(body).grep(/http:\/\/snipurl.com/)[9]
       end
 
     end
