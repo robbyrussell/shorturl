@@ -42,6 +42,18 @@ describe Service do
     end
   end
 
+  describe "#on_response" do
+    let(:body)     { "<b>http://tinyurl.com/161</b>" }
+    let(:response) { mock('Net::HTTPResponse')        }
+
+    it "should call #read_body on the response" do
+      response.should_receive(:read_body).and_return(body)
+      subject.should_receive(:on_body).with(body)
+
+      subject.on_response(response)
+    end
+  end
+
   describe "#call" do
     context "when the hostname does not resolv" do
       subject { described_class.new("oasdasobf") }
