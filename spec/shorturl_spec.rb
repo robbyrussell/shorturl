@@ -3,15 +3,18 @@ require 'shorturl'
 
 describe ShortURL do
   describe "shorten" do
-    let(:url) { 'http://groups.google.com/group/comp.lang.ruby/' }
+    let(:url)      { "http://www.google.com/" }
+    let(:shorturl) { "http://tinyurl.com/161" }
 
-    it "should shorten the url" do
-      subject.shorten(url).should be_a_url
+    it "should shorten the url using tinyurl.com" do
+      subject.shorten(url).should == shorturl
     end
 
     context "when an alternate service is given" do
+      let(:shorturl) { "http://ln-s.net/F" }
+
       it "should use the alternate service" do
-        subject.shorten(url,:lns).should =~ /^http:\/\//
+        subject.shorten(url,:lns).should == shorturl
       end
     end
 
