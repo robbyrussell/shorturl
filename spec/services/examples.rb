@@ -5,15 +5,18 @@ shared_examples_for "Services" do
     let(:shortened_url) { subject.call(url) }
 
     it "should shorten the given URL" do
-      shortened_url.should == shorturl
+      case shorturl
+      when Regexp then shortened_url.should =~ shorturl
+      else             shortened_url.should == shorturl
+      end
     end
 
     describe "shortened url" do
-      subject { Net::HTTP.get_response(URI(shorturl)) }
+      let(:response) { Net::HTTP.get_response(URI(shortened_url)) }
 
       it "should redirect to the original URL" do
-        subject.code.should =~ /^30\d$/
-        subject['location'].should == url
+        response.code.should =~ /^30\d$/
+        response['location'].should == url
       end
     end
   end
