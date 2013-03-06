@@ -33,6 +33,7 @@ Here is the list of the services supported by ShortURL:
 * http://urltea.com
 * http://vurl.me
 * http://bit.ly
+* http://is.gd
 
 == Usage:
 call-seq:
