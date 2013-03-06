@@ -5,6 +5,9 @@ require "cgi"
 
 module ShortURL
   class Service
+
+    attr_reader :hostname
+
     attr_accessor :port, :code, :method, :action, :field, :block, :response_block, :ssl
 
     # Intialize the service with a hostname (required parameter) and you
@@ -58,5 +61,6 @@ module ShortURL
     def on_response(response)
       on_body(response.read_body)
     end
+
   end
 end

@@ -5,6 +5,8 @@ describe Service do
   describe "#initialize" do
     subject { described_class.new('tinyurl.com') }
     
+    its(:hostname) { should == 'tinyurl.com' }
+
     its(:port)   { should == 80    }
     its(:code)   { should == 200   }
     its(:method) { should == :post }
