@@ -36,8 +36,6 @@ module ShortURL
     :metamark => Services::Metamark.new,
     :minilink => Services::Minilink.new,
     :lns => Services::Lns.new,
-    :shiturl => Services::ShitURL.new,
-    :shortify => Services::Shortify.new,
     :moourl => Services::MooURL.new,
     :bitly => Services::Bitly.new,
     :ur1 => Services::Url.new,
@@ -118,10 +116,8 @@ module ShortURL
   # * <tt>:lns</tt>
   # * <tt>:fyad</tt>
   # * <tt>:d62</tt>
-  # * <tt>:shiturl</tt>
   # * <tt>:littlink</tt>
   # * <tt>:clipurl</tt>
-  # * <tt>:shortify</tt>
   # * <tt>:orz</tt>
   # * <tt>:isgd</tt>
   # * <tt>:gitio</tt>
