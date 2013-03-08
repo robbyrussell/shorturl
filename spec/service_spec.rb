@@ -85,9 +85,6 @@ describe Service do
         described_class.new('tinyurl.com') do |s|
           s.code = 404
           s.action = "/create.php"
-          s.block = lambda { |body|
-            URI.extract(body).grep(/tinyurl/)[-1]
-          }
         end
       end
 

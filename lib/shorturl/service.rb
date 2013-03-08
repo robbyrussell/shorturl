@@ -8,7 +8,7 @@ module ShortURL
 
     attr_reader :hostname
 
-    attr_accessor :port, :code, :method, :action, :field, :block, :response_block, :ssl
+    attr_accessor :port, :code, :method, :action, :field, :ssl
 
     # Intialize the service with a hostname (required parameter) and you
     # can override the default values for the HTTP port, expected HTTP
