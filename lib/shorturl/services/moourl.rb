@@ -14,7 +14,7 @@ module ShortURL
       end
 
       def on_response(response)
-        "http://moourl.com/" + res["location"].match(/\?moo=/).post_match
+        "http://moourl.com/" + response["location"].match(/\?moo=/).post_match
       end
 
     end
