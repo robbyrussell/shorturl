@@ -44,6 +44,7 @@ module ShortURL
     :vurl => Services::Vurl.new,
     :isgd => Services::Isgd.new,
     :gitio => Services::Gitio.new,
+    :vamu => Services::Vamu.new,
 
     # :skinnylink => Service.new("skinnylink.com") { |s|
     #   s.block = lambda { |body| URI.extract(body).grep(/skinnylink/)[0] }
@@ -124,6 +125,7 @@ module ShortURL
   # * <tt>:orz</tt>
   # * <tt>:isgd</tt>
   # * <tt>:gitio</tt>
+  # * <tt>:vamu</tt>
   #
   # call-seq:
   #   ShortURL.shorten("http://mypage.com") => Uses TinyURL

@@ -35,6 +35,7 @@ Here is the list of the services supported by ShortURL:
 * http://bit.ly
 * http://is.gd
 * http://git.io
+* http://va.mu
 
 == Usage:
 call-seq:
