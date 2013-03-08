@@ -15,6 +15,9 @@ rescue LoadError => e
   end
 end
 
+task :test    => :spec
+task :default => :spec
+
 desc "Write the documentation"
 RDoc::Task.new("doc") { |rdoc|
   rdoc.rdoc_dir = "doc"
