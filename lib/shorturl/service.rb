@@ -32,6 +32,8 @@ module ShortURL
     # Now that our service is set up, call it with all the parameters to
     # (hopefully) return only the shortened URL.
     def call(url)
+      url = url.to_s
+
       http = Net::HTTP.new(@hostname, @port)
       http.use_ssl = @ssl
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE

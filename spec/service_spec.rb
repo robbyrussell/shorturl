@@ -63,6 +63,23 @@ describe Service do
       end
     end
 
+    context "when given a non-String object" do
+      let(:uri) { URI(url) }
+
+      subject do
+        described_class.new('tinyurl.com') do |s|
+          s.code = 200
+          s.action = "/create.php"
+        end
+      end
+
+      it "should convert the URL to a String" do
+        uri.should_receive(:to_s).and_return(url)
+
+        subject.call(uri)
+      end
+    end
+
     context "when the request code does not match" do
       subject do
         described_class.new('tinyurl.com') do |s|
